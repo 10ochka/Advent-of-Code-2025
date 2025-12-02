@@ -5,11 +5,6 @@
 #include <unistd.h>
 
 
-#define BILLION 1'000'000'000.0
-#define GREEN "\033[32m"
-#define RESET "\033[0m"
-
-
 
 int solution() {
     VnlS_StringBuffer buffer = {0};
@@ -23,28 +18,36 @@ int solution() {
         char direction_letter = vnls_chop(&input);
         int direction = direction_letter == 'L'? -1 : 1;
         int num_steps = vnls_parse_i32(&input, NULL);
-
         int new_position = position + direction * num_steps;
-        int hits = 0;
 
-        if (new_position == 0) {
-            hits = 1;
-        } else if (new_position > 0) {
-            hits = new_position / 100;
+        if (new_position > 0) {
+            count += new_position / 100;
             new_position %= 100;
-        } else {
-            int zero_hit = (position == 0)? 0 : 1;
-            hits = zero_hit + (-new_position / 100);
-            new_position = (new_position % 100 + 100) % 100;
+        } else if (new_position == 0) {
+            count += 1;
+        } else { // new_position < 0
+            if (position > 0) { // encountered 0 while rotating
+                count += 1;
+                position = 0;
+                new_position -= position;
+            }
+            count += -new_position / 100;
+            new_position %= 100; // [-99, 0]
+            new_position += 100; // [1, 100]
+            new_position %= 100; // [0,  99]
         }
 
-        count += hits;
         position = new_position;
         vnls_chop(&input);
     }
     return count;
 }
 
+
+
+#define BILLION 1'000'000'000.0
+#define GREEN "\033[32m"
+#define RESET "\033[0m"
 
 
 

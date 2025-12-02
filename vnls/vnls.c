@@ -592,17 +592,12 @@ bool vnls_read_file(VnlS_StringBuffer *buf, VnlS_String filename) {
     rewind(fp);
     while (true) {
         vnls_buf_reserve(buf, CHUNKSIZE);
-        // printf("buf [%p, %zu / %zu] -> ", (void *)buf->chars,  buf->length, buf->capacity);
         char f[1024] = {0};
         size_t chars_read = fread(
-            // buf->chars + buf->length,
             f,
             sizeof(char),
             CHUNKSIZE,
             fp);
-        // printf("chars_read=%d, %d", (int)chars_read, feof(fp));
-        // printf("%.*s\n", (int)chars_read, f);
-        // printf("%.*s\n", (int)buf->length, buf->chars);
         vnls_buf_append(buf, (VnlS_String){f, chars_read});
 
         if (!chars_read) break;
