@@ -19,7 +19,7 @@ You can easily generate sequential IDs, given one of them.
 
 where A, B, C are digits, of cource.
 
-# Day 2
+# Day 3
 ### Part 1
 Nothing special. The first and most naive solution actually used nested `for` loop :)
 ### Part 2
