@@ -32,6 +32,7 @@ void *vnls_realloc(void *ptr, size_t new_size);
 void vnls_free(void *ptr);
 
 
+
 void vnls_panicf(const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
@@ -41,7 +42,6 @@ void vnls_panicf(const char *fmt, ...) {
     va_end(args);
     abort();
 }
-
 
 
 size_t vnls_align(size_t x) {
@@ -59,6 +59,7 @@ void *vnls_malloc(size_t size) {
     return ptr;
 }
 
+
 void *vnls_realloc(void *ptr, size_t new_size) {
     void *new_ptr = realloc(ptr, new_size);
     if (new_ptr == NULL) {
@@ -68,18 +69,12 @@ void *vnls_realloc(void *ptr, size_t new_size) {
     return new_ptr;
 }
 
+
 void vnls_free(void *ptr) {
     if (ptr != NULL) {
         free(ptr);
     }
 }
-
-
-
-
-
-
-
 
 
 VnlS_String __vnls_do_nothing(VnlS_String str) {
@@ -314,8 +309,8 @@ VnlS_String vnls_remsuffix(VnlS_String str, VnlS_String suffix) {
 
 
 
-
 VnlS_StringBuffer VNLS_TEMP_BUF = {0};
+
 
 
 VnlS_String vnls_escape(VnlS_String str) {
@@ -351,7 +346,6 @@ VnlS_String vnls_escape(VnlS_String str) {
 }
 
 
-
 const char *vnls_escapes(VnlS_String str) {
     return vnls_escape(str).chars;
 }
@@ -365,11 +359,9 @@ const char *vnls_to_cstr(VnlS_String str) {
 }
 
 
-
 VnlS_String vnls_from_cstr(const char *cstr) {
     return (VnlS_String){ cstr, strlen(cstr) };
 }
-
 
 
 int getbase(VnlS_String str) {
@@ -395,6 +387,7 @@ int getbase(VnlS_String str) {
 
     return base;
 }
+
 
 uintmax_t parse_uint(VnlS_String *str, uintmax_t maxval, VnlS_Error *err, bool full) {
     int base = getbase(*str);
@@ -431,6 +424,7 @@ uintmax_t parse_uint(VnlS_String *str, uintmax_t maxval, VnlS_Error *err, bool f
     return number;
 }
 
+
 intmax_t parse_int(VnlS_String *str, intmax_t minval, intmax_t maxval, VnlS_Error *err, bool full) {
     int base = getbase(*str);
     VnlS_Error _dummy_error;
@@ -464,6 +458,7 @@ intmax_t parse_int(VnlS_String *str, intmax_t minval, intmax_t maxval, VnlS_Erro
     vnls_free(cstr);
     return number;
 }
+
 
 intmax_t parse_float(VnlS_String *str, double minval, double maxval, VnlS_Error *err, bool full) {
     VnlS_Error _dummy_error;
@@ -500,27 +495,27 @@ intmax_t parse_float(VnlS_String *str, double minval, double maxval, VnlS_Error 
 
 
 uint8_t vnls_parse_u8(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT8_MAX, err, false); }
-uint16_t    vnls_parse_u16(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT16_MAX, err, false); }
-uint32_t    vnls_parse_u32(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT32_MAX, err, false); }
-uint64_t    vnls_parse_u64(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT64_MAX, err, false); }
-int8_t      vnls_parse_i8(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT8_MIN, INT8_MAX, err, false); }
-int16_t     vnls_parse_i16(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT16_MIN, INT16_MAX, err, false); }
-int32_t     vnls_parse_i32(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT32_MIN, INT32_MAX, err, false); }
-int64_t     vnls_parse_i64(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT64_MIN, INT32_MAX, err, false); }
-float       vnls_parse_f32(VnlS_String *str, VnlS_Error *err) { return parse_float(str, FLT_MIN, FLT_MAX, err, false); }
-double      vnls_parse_f64(VnlS_String *str, VnlS_Error *err) { return parse_float(str, DBL_MIN, DBL_MAX, err, false); }
+uint16_t vnls_parse_u16(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT16_MAX, err, false); }
+uint32_t vnls_parse_u32(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT32_MAX, err, false); }
+uint64_t vnls_parse_u64(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT64_MAX, err, false); }
+int8_t vnls_parse_i8(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT8_MIN, INT8_MAX, err, false); }
+int16_t vnls_parse_i16(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT16_MIN, INT16_MAX, err, false); }
+int32_t vnls_parse_i32(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT32_MIN, INT32_MAX, err, false); }
+int64_t vnls_parse_i64(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT64_MIN, INT32_MAX, err, false); }
+float vnls_parse_f32(VnlS_String *str, VnlS_Error *err) { return parse_float(str, FLT_MIN, FLT_MAX, err, false); }
+double vnls_parse_f64(VnlS_String *str, VnlS_Error *err) { return parse_float(str, DBL_MIN, DBL_MAX, err, false); }
 
 
-uint8_t     vnls_to_u8(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT8_MAX, err, true); }
-uint16_t    vnls_to_u16(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT16_MAX, err, true); }
-uint32_t    vnls_to_u32(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT32_MAX, err, true); }
-uint64_t    vnls_to_u64(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT64_MAX, err, true); }
-int8_t      vnls_to_i8(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT8_MIN, INT8_MAX, err, true); }
-int16_t     vnls_to_i16(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT16_MIN, INT16_MAX, err, true); }
-int32_t     vnls_to_i32(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT32_MIN, INT32_MAX, err, true); }
-int64_t     vnls_to_i64(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT64_MIN, INT32_MAX, err, true); }
-float       vnls_to_f32(VnlS_String *str, VnlS_Error *err) { return parse_float(str, FLT_MIN, FLT_MAX, err, true); }
-double      vnls_to_f64(VnlS_String *str, VnlS_Error *err) { return parse_float(str, DBL_MIN, DBL_MAX, err, true); }
+uint8_t vnls_to_u8(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT8_MAX, err, true); }
+uint16_t vnls_to_u16(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT16_MAX, err, true); }
+uint32_t vnls_to_u32(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT32_MAX, err, true); }
+uint64_t vnls_to_u64(VnlS_String *str, VnlS_Error *err) { return parse_uint(str, UINT64_MAX, err, true); }
+int8_t vnls_to_i8(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT8_MIN, INT8_MAX, err, true); }
+int16_t vnls_to_i16(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT16_MIN, INT16_MAX, err, true); }
+int32_t vnls_to_i32(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT32_MIN, INT32_MAX, err, true); }
+int64_t vnls_to_i64(VnlS_String *str, VnlS_Error *err) { return parse_int(str, INT64_MIN, INT32_MAX, err, true); }
+float vnls_to_f32(VnlS_String *str, VnlS_Error *err) { return parse_float(str, FLT_MIN, FLT_MAX, err, true); }
+double vnls_to_f64(VnlS_String *str, VnlS_Error *err) { return parse_float(str, DBL_MIN, DBL_MAX, err, true); }
 
 
 int vnls_chop(VnlS_String *str) {
@@ -531,7 +526,6 @@ int vnls_chop(VnlS_String *str) {
     *str = vnls_lshift(*str, 1);
     return c;
 }
-
 
 
 VnlS_Partition vnls_partition(VnlS_String str, VnlS_String delim) {
@@ -553,7 +547,6 @@ VnlS_Partition vnls_partition(VnlS_String str, VnlS_String delim) {
 }
 
 
-
 VnlS_Partition vnls_rpartition(VnlS_String str, VnlS_String delim) {
     ptrdiff_t delim_start = vnls_rfind(str, delim);
 
@@ -573,11 +566,9 @@ VnlS_Partition vnls_rpartition(VnlS_String str, VnlS_String delim) {
 }
 
 
-
 void vnls_buf_reset(VnlS_StringBuffer *buf) {
     buf->length = 0;
 }
-
 
 
 void vnls_buf_clear(VnlS_StringBuffer *buf) {
@@ -598,7 +589,6 @@ void vnls_buf_reserve(VnlS_StringBuffer *buf, size_t extra_size) {
 }
 
 
-
 void vnls_buf_reserve_exact(VnlS_StringBuffer *buf, size_t size) {
     if (buf->capacity < size) {
         buf->chars = vnls_realloc(buf->chars, size);
@@ -606,10 +596,12 @@ void vnls_buf_reserve_exact(VnlS_StringBuffer *buf, size_t size) {
     }
 }
 
+
 void vnls_buf_push(VnlS_StringBuffer *buf, char c) {
     vnls_buf_reserve(buf, 1);
     buf->chars[buf->length++] = c;
 }
+
 
 void vnls_buf_append(VnlS_StringBuffer *buf, VnlS_String str) {
     vnls_buf_reserve(buf, str.length);
@@ -617,12 +609,15 @@ void vnls_buf_append(VnlS_StringBuffer *buf, VnlS_String str) {
     buf->length += str.length;
 }
 
+
 void vnls_buf_appends(VnlS_StringBuffer *buf, const char *cstr) {
     size_t len = strlen(cstr);
     vnls_buf_reserve(buf, len);
     memcpy(buf->chars + buf->length, cstr, len);
     buf->length += len;
 }
+
+
 void vnls_buf_appendf(VnlS_StringBuffer *buf, const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
@@ -638,7 +633,6 @@ void vnls_buf_appendf(VnlS_StringBuffer *buf, const char *fmt, ...) {
     buf->length += extra_size;
     va_end(args);
 }
-
 
 
 const char *vnls_buf_cstr(VnlS_StringBuffer *buf) {
