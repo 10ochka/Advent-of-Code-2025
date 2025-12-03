@@ -61,6 +61,12 @@ bool vnls_is_empty(VnlS_String str);
 // Check if two strings are equal.
 bool vnls_eq(VnlS_String stra, VnlS_String strb);
 
+// Get char at position `pos`
+// If `pos >= 0`, equivalent to `str.chars[pos]`
+// If `pos < 0`, equivalent to `str.chars[str.length-pos]`
+// If `pos` out of bounds, returns `VNLS_OUTOFBOUNDS`
+int vnls_at(VnlS_String str, ptrdiff_t pos);
+
 // Get a substring of `str` at half-open interval `[start, start + length)`.
 // First, lshifts to the `start`. Second, rshifts to strip the length down to `length`.
 // This ensures that in any case resulting substring is 'part' of the input string.

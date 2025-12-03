@@ -105,6 +105,19 @@ bool vnls_eq(VnlS_String stra, VnlS_String strb) {
 }
 
 
+int vnls_at(VnlS_String str, ptrdiff_t pos) {
+    if (str.length <= pos || pos < -str.length) {
+        return VNLS_OUTOFBOUNDS;
+    }
+
+    if (pos >= 0) {
+        return str.chars[pos];
+    } else {
+        return str.chars[str.length-pos];
+    }
+}
+
+
 VnlS_String vnls_substr(VnlS_String str, size_t start, size_t length) {
     str = vnls_lshift(str, start);
     if (str.length > length) {
