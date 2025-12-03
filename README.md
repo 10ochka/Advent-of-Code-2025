@@ -18,3 +18,12 @@ You can easily generate sequential IDs, given one of them.
 | Number  | AAAAAA | ABABAB | ABCABC |
 
 where A, B, C are digits, of cource.
+
+# Day 2
+### Part 1
+Nothing special. The first and most naive solution actually used nested `for` loop :)
+### Part 2
+Well, recursive solution wasn't successful... So after some time i created the current solution. In `part1.c` file XD.
+And since the second part is just a generalization of the 1st, it wasn't a big deal to fix my fault.
+
+P.S. Maybe it is better to factor out `vnls` module out of this repo.
