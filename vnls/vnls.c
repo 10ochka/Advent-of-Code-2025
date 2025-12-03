@@ -156,7 +156,7 @@ ptrdiff_t vnls_find(VnlS_String haystack, VnlS_String needle) {
         return VNLS_NOTFOUND;
     }
 
-    for (size_t i = 0; i < haystack.length - needle.length; ++i) {
+    for (size_t i = 0; 0 <= haystack.length - needle.length; ++i) {
         if (vnls_startswith(haystack, needle)) {
             return i;
         }
