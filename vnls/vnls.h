@@ -1,7 +1,7 @@
 /*
 Macros:
-    VNSL_NO_GENERICS
-
+    VNSL_NO_GENERICS    do not define macros for automatic convesion
+                        from C-srings and string buffers (`VnlS_StringBuffer`) into `VnlS_String`
 */
 
 
@@ -45,8 +45,11 @@ typedef enum VnlS_Error {
 
 
 
-#define VNLS_EMPTY (-1)
-#define VNLS_NOTFOUND (-1)
+enum {
+    VNLS_EMPTY = -1,
+    VNLS_NOTFOUND = -2,
+    VNLS_OUTOFBOUNDS = -3,
+};
 
 
 
