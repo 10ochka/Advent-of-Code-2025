@@ -169,6 +169,13 @@ int vnls_chop(VnlS_String *);
 // with their chars pointing at `str.chars + str.length`
 VnlS_Partition vnls_partition(VnlS_String str, VnlS_String delim);
 
+// Splits `str` string into 3 parts:
+// - `VnlS_Partition.before`: part before last occurence of `delim`
+// - `VnlS_Partition.delim`: `delim` in `str`
+// - `VnlS_Partition.after`: part after last occurence of `delim`
+// If `delim` is not found, `VnlS_Partition.delim` and `VnlS_Partition.after` will be empty strings,
+// with their chars pointing at `str.chars + str.length`
+VnlS_Partition vnls_rpartition(VnlS_String str, VnlS_String delim);
 
 
 // Reset buffer
@@ -242,6 +249,7 @@ bool vnls_read_file(VnlS_StringBuffer *, VnlS_String filename);
 #define vnls_to_f32(str, num)           vnls_to_f32(VnlS_String(str), num)
 #define vnls_to_f64(str, num)           vnls_to_f64(VnlS_String(str), num)
 #define vnls_partition(str, delim)      vnls_partition(VnlS_String(str), VnlS_String(delim))
+#define vnls_rpartition(str, delim)      vnls_rpartition(VnlS_String(str), VnlS_String(delim))
 
 #define vnls_buf_append(buf, item)                          \
     _Generic((item),                                        \

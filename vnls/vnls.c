@@ -521,6 +521,25 @@ VnlS_Partition vnls_partition(VnlS_String str, VnlS_String delim) {
 
 
 
+VnlS_Partition vnls_rpartition(VnlS_String str, VnlS_String delim) {
+    ptrdiff_t delim_start = vnls_rfind(str, delim);
+
+    if (delim_start == VNLS_NOTFOUND) {
+        return (VnlS_Partition) {
+            .before = str,
+            .delim = vnls_substr(str, str.length, 0),
+            .after = vnls_substr(str, str.length, 0),
+        };
+    } else {
+        return (VnlS_Partition) {
+            .before = vnls_substr(str, 0, delim_start),
+            .delim = vnls_substr(str, delim_start, delim.length),
+            .after = vnls_substr(str, delim_start + delim.length, SIZE_T_MAX),
+        };
+    }
+}
+
+
 
 void vnls_buf_reset(VnlS_StringBuffer *buf) {
     buf->length = 0;
