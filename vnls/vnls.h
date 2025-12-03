@@ -28,12 +28,21 @@ typedef struct VnlS_StringBuffer {
 } VnlS_StringBuffer;
 
 
+typedef struct VnlS_Partition {
+    VnlS_String before;
+    VnlS_String delim;
+    VnlS_String after;
+} VnlS_Partition;
+
+
+
 typedef enum VnlS_Error {
     VNLS_PARSE_UNDERFLOW,
     VNLS_PARSE_OVERFLOW,
     VNLS_PARSE_NO_NUMBER,
     VNLS_PARSE_NOT_FULL,
 } VnlS_Error;
+
 
 
 #define VNLS_EMPTY (-1)
@@ -148,8 +157,17 @@ int64_t     vnls_to_i64(VnlS_String *, VnlS_Error *);
 float       vnls_to_f32(VnlS_String *, VnlS_Error *);
 double      vnls_to_f64(VnlS_String *, VnlS_Error *);
 
-
+// Chop the first character from the string.
+// If string is empty, returns `VNLS_EMPTY`
 int vnls_chop(VnlS_String *);
+
+// Splits `str` string into 3 parts:
+// - `VnlS_Partition.before`: part before first occurence of `delim`
+// - `VnlS_Partition.delim`: `delim` in `str`
+// - `VnlS_Partition.after`: part after first occurence of `delim`
+// If `delim` is not found, `VnlS_Partition.delim` and `VnlS_Partition.after` will be empty strings,
+// with their chars pointing at `str.chars + str.length`
+VnlS_Partition vnls_partition(VnlS_String str, VnlS_String delim);
 
 
 
@@ -223,6 +241,7 @@ bool vnls_read_file(VnlS_StringBuffer *, VnlS_String filename);
 #define vnls_to_i64(str, num)           vnls_to_i64(VnlS_String(str), num)
 #define vnls_to_f32(str, num)           vnls_to_f32(VnlS_String(str), num)
 #define vnls_to_f64(str, num)           vnls_to_f64(VnlS_String(str), num)
+#define vnls_partition(str, delim)      vnls_partition(VnlS_String(str), VnlS_String(delim))
 
 #define vnls_buf_append(buf, item)                          \
     _Generic((item),                                        \

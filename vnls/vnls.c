@@ -1,16 +1,16 @@
 
+#define VNLS_NO_GENERICS
+#include "vnls.h"
+
 #include <errno.h>
 #include <float.h>
 #include <inttypes.h>
-#include <stdint.h>
-#define VNLS_NO_GENERICS
-#include "vnls.h"
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <errno.h>
+#include <limits.h>
 
 #define min(a, b) ((a) < (b)) ? (a) : (b)
 #define max(a, b) ((a) > (b)) ? (a) : (b)
@@ -497,6 +497,26 @@ int vnls_chop(VnlS_String *str) {
     char c = str->chars[0];
     *str = vnls_lshift(*str, 1);
     return c;
+}
+
+
+
+VnlS_Partition vnls_partition(VnlS_String str, VnlS_String delim) {
+    ptrdiff_t delim_start = vnls_find(str, delim);
+
+    if (delim_start == VNLS_NOTFOUND) {
+        return (VnlS_Partition) {
+            .before = str,
+            .delim = vnls_substr(str, str.length, 0),
+            .after = vnls_substr(str, str.length, 0),
+        };
+    } else {
+        return (VnlS_Partition) {
+            .before = vnls_substr(str, 0, delim_start),
+            .delim = vnls_substr(str, delim_start, delim.length),
+            .after = vnls_substr(str, delim_start + delim.length, SIZE_T_MAX),
+        };
+    }
 }
 
 
