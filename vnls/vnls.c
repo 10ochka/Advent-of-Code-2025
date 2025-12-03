@@ -147,6 +147,26 @@ bool vnls_endswith(VnlS_String str, VnlS_String suffix) {
 }
 
 
+bool vnls_contains(VnlS_String haystack, VnlS_String needle) {
+    return vnls_count(haystack, needle) > 0;
+}
+
+
+size_t vnls_count(VnlS_String haystack, VnlS_String needle) {
+    size_t count = 0;
+    while (haystack.length) {
+        ptrdiff_t idx = vnls_find(haystack, needle);
+        if (idx != VNLS_NOTFOUND) {
+            count += 1;
+            haystack = vnls_lshift(haystack, idx + needle.length);
+        } else {
+            break;
+        }
+    }
+    return count;
+}
+
+
 ptrdiff_t vnls_find(VnlS_String haystack, VnlS_String needle) {
     if (vnls_is_empty(needle)) {
         return 0;

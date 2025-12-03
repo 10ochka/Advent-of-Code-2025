@@ -86,6 +86,12 @@ bool vnls_startswith(VnlS_String str, VnlS_String prefix);
 // Check if `str` ends with `suffix`.
 bool vnls_endswith(VnlS_String str, VnlS_String suffix);
 
+// Check if `needle` is present in `haystack`
+bool vnls_contains(VnlS_String haystack, VnlS_String needle);
+
+// Count how many times `needle` is present in `haystack`
+size_t vnls_count(VnlS_String haystack, VnlS_String needle);
+
 // Find the first occurence of `needle` in the `haystack`.
 // Returns index of `needle` or `vnls_NOTFOUND` if not found.
 ptrdiff_t vnls_find(VnlS_String haystack, VnlS_String needle);
@@ -249,7 +255,9 @@ bool vnls_read_file(VnlS_StringBuffer *, VnlS_String filename);
 #define vnls_to_f32(str, num)           vnls_to_f32(VnlS_String(str), num)
 #define vnls_to_f64(str, num)           vnls_to_f64(VnlS_String(str), num)
 #define vnls_partition(str, delim)      vnls_partition(VnlS_String(str), VnlS_String(delim))
-#define vnls_rpartition(str, delim)      vnls_rpartition(VnlS_String(str), VnlS_String(delim))
+#define vnls_rpartition(str, delim)     vnls_rpartition(VnlS_String(str), VnlS_String(delim))
+#define vnls_contains(haystack, needle) vnls_contains(VnlS_String(haystack), VnlS_String(needle))
+#define vnls_count(haystack, needle)    vnls_count(VnlS_String(haystack), VnlS_String(needle))
 
 #define vnls_buf_append(buf, item)                          \
     _Generic((item),                                        \
