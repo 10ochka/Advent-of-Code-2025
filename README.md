@@ -30,5 +30,7 @@ P.S. Maybe it is better to factor out `vnls` module out of this repo.
 
 # Day 4
 Nothing special. Just convolution with kernel
+
 ![](assets/Day4-Kernel.svg)
+
 and immediate deletion in part 4. The hardest part is to remember to `free` the matrix. :)
