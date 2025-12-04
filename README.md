@@ -27,3 +27,14 @@ Well, recursive solution wasn't successful... So after some time i created the c
 And since the second part is just a generalization of the 1st, it wasn't a big deal to fix my fault.
 
 P.S. Maybe it is better to factor out `vnls` module out of this repo.
+
+# Day 4
+Nothing special. Just convolution with kernel
+$$
+\begin{bmatrix}
+1 & 1 & 1\\
+1 & 0 & 1\\
+1 & 1 & 1\\
+\end{bmatrix}
+$$
+and immediate deletion in part 4. The hardest part is to remember to `free` the matrix. :)

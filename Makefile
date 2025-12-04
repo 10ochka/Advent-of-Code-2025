@@ -28,4 +28,17 @@ day3-2: day3/part2.c
 	@ cd day3 && $(CC) $(CFLAGS) $(STRINGS) part2.c -o part2
 	@ cd day3 && ./part2
 
-.PHONY: day1-1 day1-2 day2-1 day2-2 day3-1 day3-2
+day4-1: day4/part1.c
+	@ cd day4 && $(CC) $(CFLAGS) $(STRINGS) part1.c -o part1
+	@ cd day4 && ./part1
+
+day4-2: day4/part2.c
+	@ cd day4 && $(CC) $(CFLAGS) $(STRINGS) part2.c -o part2
+	@ cd day4 && ./part2
+
+
+
+.PHONY: day1-1 day1-2 \
+		day2-1 day2-2 \
+		day3-1 day3-2 \
+		day4-1 day4-2
