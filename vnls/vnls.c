@@ -101,7 +101,7 @@ bool vnls_eq(VnlS_String stra, VnlS_String strb) {
 
 
 int vnls_at(VnlS_String str, ptrdiff_t pos) {
-    if (str.length <= pos || pos < -str.length) {
+    if ((ptrdiff_t)str.length <= pos || pos < -(ptrdiff_t)str.length) {
         return VNLS_OUTOFBOUNDS;
     }
 
