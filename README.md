@@ -37,6 +37,6 @@ and immediate deletion in part 4. The hardest part is to remember to `free` the 
 
 # Day 5
 ### Part 1
-Wow, first application o dynamic arrays (not including use of string buffer)!
+Wow, first application of dynamic arrays (not including use of string buffer)!
 ### Part 2
-It was a pretty hard task to correctly merge ranges.
+It was a pretty hard task to correctly merge ranges. Like mentally unroll doubly nested `for` loop.
