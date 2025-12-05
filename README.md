@@ -34,3 +34,9 @@ Nothing special. Just convolution with kernel
 ![](assets/Day4-Kernel.svg)
 
 and immediate deletion in part 4. The hardest part is to remember to `free` the matrix. :)
+
+# Day 5
+### Part 1
+Wow, first application o dynamic arrays (not including use of string buffer)!
+### Part 2
+It was a pretty hard task to correctly merge ranges.
