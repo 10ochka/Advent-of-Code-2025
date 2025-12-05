@@ -37,7 +37,7 @@ typedef struct VnlS_Partition {
 
 
 typedef enum VnlS_Error {
-    VNLS_PARSE_UNDERFLOW,
+    VNLS_PARSE_UNDERFLOW = 1,
     VNLS_PARSE_OVERFLOW,
     VNLS_PARSE_NO_NUMBER,
     VNLS_PARSE_NOT_FULL,
@@ -253,6 +253,7 @@ bool vnls_read_file(VnlS_StringBuffer *, VnlS_String filename);
 #define vnls_remprefix(str, prefix)     vnls_remprefix(VnlS_String(str), VnlS_String(prefix))
 #define vnls_remsuffix(str, suffix)     vnls_remsuffix(VnlS_String(str), VnlS_String(suffix))
 #define vnls_escape(str)                vnls_escape(VnlS_String(str))
+#define vnls_escapes(str)               vnls_escapes(VnlS_String(str))
 #define vnls_to_u8(str, num)            vnls_to_u8(VnlS_String(str), num)
 #define vnls_to_u16(str, num)           vnls_to_u16(VnlS_String(str), num)
 #define vnls_to_u32(str, num)           vnls_to_u32(VnlS_String(str), num)
