@@ -243,7 +243,7 @@ bool vnls_read_file(VnlS_StringBuffer *, VnlS_String filename);
 #define vnls_startswith(str, prefix)    vnls_startswith(VnlS_String(str), VnlS_String(prefix))
 #define vnls_endswith(str, suffix)      vnls_endswith(VnlS_String(str), VnlS_String(suffix))
 #define vnls_find(haystack, needle)     vnls_find(VnlS_String(haystack), VnlS_String(needle))
-#define vnls_rfind(heystack, needle)    vnls_rfind(VnlS_String(haystack), VnlS_String(needle))
+#define vnls_rfind(haystack, needle)    vnls_rfind(VnlS_String(haystack), VnlS_String(needle))
 #define vnls_ltrim(str)                 vnls_ltrim(VnlS_String(str))
 #define vnls_rtrim(str)                 vnls_rtrim(VnlS_String(str))
 #define vnls_trim(str)                  vnls_trim(VnlS_String(str))

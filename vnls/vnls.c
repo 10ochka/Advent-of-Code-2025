@@ -1,4 +1,5 @@
 
+#include <stddef.h>
 #define VNLS_NO_GENERICS
 #include "vnls.h"
 
@@ -166,7 +167,7 @@ size_t vnls_count(VnlS_String haystack, VnlS_String needle) {
         ptrdiff_t idx = vnls_find(haystack, needle);
         if (idx != VNLS_NOTFOUND) {
             count += 1;
-            haystack = vnls_lshift(haystack, idx + needle.length);
+            haystack = vnls_substr(haystack, idx + needle.length, SIZE_T_MAX);
         } else {
             break;
         }
@@ -184,11 +185,10 @@ ptrdiff_t vnls_find(VnlS_String haystack, VnlS_String needle) {
         return VNLS_NOTFOUND;
     }
 
-    for (size_t i = 0; 0 <= haystack.length - needle.length; ++i) {
-        if (vnls_startswith(haystack, needle)) {
+    for (size_t i = 0; i < haystack.length - needle.length; ++i) {
+        if (vnls_startswith(vnls_substr(haystack, i, SIZE_T_MAX), needle)) {
             return i;
         }
-        haystack = vnls_lshift(haystack, 1);
     }
 
     return VNLS_NOTFOUND;
@@ -206,7 +206,7 @@ ptrdiff_t vnls_rfind(VnlS_String haystack, VnlS_String needle) {
 
     for (size_t i = 0; i < haystack.length - needle.length; ++i) {
         if (vnls_endswith(haystack, needle)) {
-            return i;
+            return haystack.length - needle.length;
         }
         haystack = vnls_rshift(haystack, 1);
     }
@@ -216,21 +216,21 @@ ptrdiff_t vnls_rfind(VnlS_String haystack, VnlS_String needle) {
 
 
 VnlS_String vnls_ltrim(VnlS_String str) {
+    size_t shift = 0;
     for (size_t i = 0; i < str.length; ++i) {
-        char fist_char = str.chars[0];
-        if (isspace(fist_char)) {
-            str = vnls_lshift(str, 1);
+        if (isspace(str.chars[i])) {
+            shift++;
         } else {
             break;
         }
     }
-
-    return str;
+    return vnls_lshift(str, shift);
 }
 
 
 VnlS_String vnls_rtrim(VnlS_String str) {
-    for (size_t i = 0; i < str.length; ++i) {
+    size_t original_length = str.length;
+    for (size_t i = 0; i < original_length; ++i) {
         char last_char = str.chars[str.length - 1];
         if (isspace(last_char)) {
             str = vnls_rshift(str, 1);
@@ -238,7 +238,6 @@ VnlS_String vnls_rtrim(VnlS_String str) {
             break;
         }
     }
-
     return str;
 }
 
