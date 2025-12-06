@@ -40,3 +40,7 @@ and immediate deletion in part 2. The hardest part is to remember to `free` the 
 Wow, first application of dynamic arrays (not including use of string buffer)!
 ### Part 2
 It was a pretty hard task to correctly merge ranges. Like mentally unroll doubly nested `for` loop.
+
+# Day 6
+Nothing special, nice problems. 
+Fun fact: _on my machine_, part 2 solution is performing 6x times faster than part 1 solution.
