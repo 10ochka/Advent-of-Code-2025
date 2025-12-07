@@ -51,10 +51,19 @@ day6-1: day6/part1.c
 day6-2: day6/part2.c
 	@ cd day6 && $(CC) $(CFLAGS) $(STRINGS) part2.c -o part2
 	@ cd day6 && ./part2
+	
+day7-1: day7/part1.c
+	@ cd day7 && $(CC) $(CFLAGS) $(STRINGS) part1.c -o part1
+	@ cd day7 && ./part1
+
+day7-2: day7/part2.c
+	@ cd day7 && $(CC) $(CFLAGS) $(STRINGS) part2.c -o part2
+	@ cd day7 && ./part2
 
 .PHONY: day1-1 day1-2 \
 		day2-1 day2-2 \
 		day3-1 day3-2 \
 		day4-1 day4-2 \
 		day5-1 day5-2 \
-		day6-1 day6-2
+		day6-1 day6-2 \
+		day7-1 day7-2 

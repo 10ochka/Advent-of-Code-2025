@@ -44,3 +44,6 @@ It was a pretty hard task to correctly merge ranges. Like mentally unroll doubly
 # Day 6
 Nothing special, nice problems. 
 Fun fact: _on my machine_, part 2 solution is performing 6x times faster than part 1 solution.
+
+# Day 7
+While not very efficient, solutions are, imho, pretty intuitive.
